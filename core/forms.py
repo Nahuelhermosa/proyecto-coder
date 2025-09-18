@@ -1,5 +1,5 @@
 from django import forms
-from core.models import estudiante
+from core.models import estudiante,Curso, Profesor
 
 
 class EstudianteForm(forms.ModelForm):
@@ -30,6 +30,30 @@ class EstudianteFormManual(forms.Form):
     
     def clean_nro_legajo(self):
         nro_legajo = self.cleaned_data["nro_legajo"]
-        if Estudiante.objects.filter(nro_legajo=nro_legajo).exists():
+        if estudiante.objects.filter(nro_legajo=nro_legajo).exists():
             raise forms.ValidationError("Numero de legajo existente")
         return nro_legajo
+    
+    
+# Formulario para Curso
+class CursoForm(forms.ModelForm):
+    class Meta:
+        model = Curso
+        fields = ['nombre', 'codigo', 'descripcion', 'fecha_inicio', 'fecha_fin']
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
+            'fecha_fin': forms.DateInput(attrs={'type': 'date'})
+        }
+
+# Formulario para Profesor
+class ProfesorForm(forms.ModelForm):
+    class Meta:
+        model = Profesor
+        fields = ['nombre', 'apellido', 'email', 'especialidad', 'cursos']
+        widgets = {
+            'cursos': forms.CheckboxSelectMultiple()  # Para seleccionar varios cursos
+        }
+
+# Formulario de búsqueda (por ejemplo, Estudiante por apellido)
+class BuscarEstudianteForm(forms.Form):
+    apellido = forms.CharField(max_length=50, label="Buscar por apellido")

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 # from .models import Estudiante # Relativa
-from core.models import estudiante # Absoluta
+from core.models import estudiante# Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual
 # Create your views here.
 # dict.items() -> dict_items([(k1, v1), (k2, v2), ...])
@@ -34,7 +34,7 @@ def estudiante_list(request):
     query = request.GET.get("q", "")
     
     if query:
-        lista_estudiantes = estudiante.objects.filter(nombre__icontains=query)
+        lista_estudiantes =estudiante.objects.filter(nombre__icontains=query)
     else:
         lista_estudiantes = estudiante.objects.all()
     
