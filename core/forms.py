@@ -50,9 +50,20 @@ class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
         fields = ['nombre', 'apellido', 'email', 'especialidad', 'cursos']
-        widgets = {
-            'cursos': forms.CheckboxSelectMultiple()  # Para seleccionar varios cursos
+        
+        labels = {
+            "nombre": "Nombre del Profesor",
+            "apellido": "Apellido",
+            "email": "Correo Electrónico",
+            "materia": "Materia que dicta",
         }
+        widgets = {
+            "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "apellido": forms.TextInput(attrs={"class": "form-control"}),
+            "email": forms.EmailInput(attrs={"class": "form-control"}),
+            "materia": forms.TextInput(attrs={"class": "form-control"}),
+        }
+
 
 # Formulario de búsqueda (por ejemplo, Estudiante por apellido)
 class BuscarEstudianteForm(forms.Form):
