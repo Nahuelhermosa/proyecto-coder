@@ -1,0 +1,49 @@
+{% extends "core/index.html" %}
+
+{% block title %}Listado de Cursos{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mb-4">
+  <div class="col-md-8 col-lg-6 text-center">
+    <a href="{% url 'crear_curso' %}" class="btn btn-success me-2 mb-2">Crear curso</a>
+  </div>
+</div>
+
+<div class="row justify-content-center mb-4">
+  <div class="col-md-8 col-lg-6">
+    <form method="GET" class="d-flex">
+      <input type="text" name="q" value="{{ q }}" class="form-control me-2" placeholder="Buscar curso por nombre">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-lg rounded-4 border-0">
+      <div class="card-header bg-info text-white text-center rounded-top-4">
+        <h2 class="mb-0">Lista de Cursos</h2>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          {% for curso in cursos %}
+            <li class="list-group-item">
+              <div>
+                <strong>{{ curso.nombre }}</strong> <small class="text-muted">({{ curso.codigo }})</small>
+              </div>
+              <div class="text-muted small mt-1">
+                {{ curso.descripcion|truncatechars:120 }}
+              </div>
+              <div class="small text-muted mt-2">
+                {{ curso.fecha_inicio }} — {{ curso.fecha_fin }}
+              </div>
+            </li>
+          {% empty %}
+            <li class="list-group-item text-center text-muted">No hay cursos registrados</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

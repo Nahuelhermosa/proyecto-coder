@@ -39,10 +39,20 @@ class EstudianteFormManual(forms.Form):
 class CursoForm(forms.ModelForm):
     class Meta:
         model = Curso
-        fields = ['nombre', 'codigo', 'descripcion', 'fecha_inicio', 'fecha_fin']
+        fields = ["nombre", "codigo", "descripcion", "fecha_inicio", "fecha_fin"]
+        labels = {
+            "nombre": "Nombre del curso",
+            "codigo": "Código",
+            "descripcion": "Descripción",
+            "fecha_inicio": "Fecha de inicio",
+            "fecha_fin": "Fecha de fin",
+        }
         widgets = {
-            'fecha_inicio': forms.DateInput(attrs={'type': 'date'}),
-            'fecha_fin': forms.DateInput(attrs={'type': 'date'})
+            "nombre": forms.TextInput(attrs={"class": "form-control"}),
+            "codigo": forms.TextInput(attrs={"class": "form-control"}),
+            "descripcion": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+            "fecha_inicio": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "fecha_fin": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
         }
 
 # Formulario para Profesor

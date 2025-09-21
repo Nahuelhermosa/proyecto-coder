@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 # from .models import Estudiante # Relativa
 from core.models import estudiante# Absoluta
-from core.forms import EstudianteForm, EstudianteFormManual, ProfesorForm
-from .models import Profesor
+from core.forms import EstudianteForm, EstudianteFormManual, ProfesorForm,CursoForm
+from .models import Profesor, Curso
 # Create your views here.
 # dict.items() -> dict_items([(k1, v1), (k2, v2), ...])
 def hola_mundo(request):
@@ -60,3 +60,20 @@ def listar_profesores(request):
     profesores = Profesor.objects.all()
     return render(request, "core/profesores.html", {"profesores": profesores})
 
+def listar_cursos(request):
+    q = request.GET.get("q", "")
+    if q:
+        cursos = Curso.objects.filter(nombre__icontains=q)
+    else:
+        cursos = Curso.objects.all()
+    return render(request, "core/cursos.html", {"cursos": cursos, "q": q})
+
+def crear_curso(request):
+    if request.method == "POST":
+        form = CursoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("listar-cursos")
+    else:
+        form = CursoForm()
+    return render(request, "core/cursos_form.html", {"form": form})
