@@ -35,7 +35,7 @@ class EstudianteFormManual(forms.Form):
         return nro_legajo
     
     
-# Formulario para Curso
+# Formulario Curso
 class CursoForm(forms.ModelForm):
     class Meta:
         model = Curso
@@ -55,7 +55,7 @@ class CursoForm(forms.ModelForm):
             "fecha_fin": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
         }
 
-# Formulario para Profesor
+# Formulario Profesor
 class ProfesorForm(forms.ModelForm):
     class Meta:
         model = Profesor
@@ -75,6 +75,6 @@ class ProfesorForm(forms.ModelForm):
         }
 
 
-# Formulario de búsqueda (por ejemplo, Estudiante por apellido)
+# Formulario de busqueda
 class BuscarEstudianteForm(forms.Form):
     apellido = forms.CharField(max_length=50, label="Buscar por apellido")
