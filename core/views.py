@@ -8,6 +8,9 @@ from .models import Profesor, Curso
 def hola_mundo(request):
     return render(request, "core/index.html")
 
+def index(request):
+    return render(request, "core/index.html")
+
 # def estudiante_list(request):
 #     # Lógica para obtener la lista de estudiantes desde la base de datos
 #     estudiantes = Estudiante.objects.all() # QuerySet([<Estudiante>, <Estudiante>, ...])
