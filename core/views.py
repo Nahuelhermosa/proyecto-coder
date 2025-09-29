@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from core.models import estudiante# Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual, ProfesorForm,CursoForm
 from .models import Profesor, Curso
+from django.shortcuts import get_object_or_404
 # Create your views here.
 # dict.items() -> dict_items([(k1, v1), (k2, v2), ...])
 def hola_mundo(request):
@@ -46,6 +47,28 @@ def estudiante_list(request):
         "lista_estudiantes": lista_estudiantes
     }
     return render(request, "core/estudiantes_list.html", contexto)
+
+def editar_estudiante(request, estudiante_id):
+    est = get_object_or_404(estudiante, id=estudiante_id)
+
+    if request.method == "POST":
+        formulario = EstudianteForm(request.POST, instance=est)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect("listar-estudiantes")
+    else:
+        formulario = EstudianteForm(instance=est)
+
+    return render(request, "core/estudiante_form.html", {"form": formulario})
+
+def eliminar_estudiante(request, estudiante_id):
+    est = get_object_or_404(estudiante, id=estudiante_id)
+
+    if request.method == "POST":
+        est.delete()
+        return redirect("listar-estudiantes")
+
+    return render(request, "core/estudiante_confirm_delete.html", {"estudiante": est})
 
 def crear_profesor(request):
     if request.method == "POST":

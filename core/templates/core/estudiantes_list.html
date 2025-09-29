@@ -35,6 +35,11 @@
               <span class="badge bg-secondary rounded-pill">
                 Legajo: {{ estudiante.nro_legajo }}
               </span>
+              <span>
+                
+                 <a class="btn btn-primary" href="{% url 'editar-estudiante' estudiante.id %}">Editar</a>
+                 <a class="btn btn-primary" href="{% url 'eliminar-estudiante' estudiante.id %}">Eliminar</a> 
+              </span>
             </li>
           {% empty %}
             <li class="list-group-item text-center text-muted">No hay estudiantes registrados</li>
