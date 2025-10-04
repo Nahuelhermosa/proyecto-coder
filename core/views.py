@@ -103,3 +103,7 @@ def crear_curso(request):
     else:
         form = CursoForm()
     return render(request, "core/cursos_form.html", {"form": form})
+
+def estudiante_detail(request, pk):
+    est = get_object_or_404(estudiante, pk=pk)
+    return render(request, "core/estudiante_detail.html", {"estudiante": est})

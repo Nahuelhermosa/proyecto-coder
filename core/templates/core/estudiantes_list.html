@@ -37,8 +37,10 @@
               </span>
               <span>
                 
-                 <a class="btn btn-primary" href="{% url 'editar-estudiante' estudiante.id %}">Editar</a>
-                 <a class="btn btn-primary" href="{% url 'eliminar-estudiante' estudiante.id %}">Eliminar</a> 
+                <a class="btn btn-primary" href="{% url 'editar-estudiante' estudiante.id %}">Editar</a>
+                <a class="btn btn-primary" href="{% url 'eliminar-estudiante' estudiante.id %}">Eliminar</a> 
+                <a class="btn btn-primary" href="{% url 'detalle-estudiante' pk=estudiante.id %}">Ver estudiante</a>
+
               </span>
             </li>
           {% empty %}
