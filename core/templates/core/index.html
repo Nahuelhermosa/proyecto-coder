@@ -22,11 +22,38 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Menu</a></li>
+        <ul class="navbar-nav ms-auto"> 
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Menu</a></li>  
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-estudiantes' %}">Estudiantes</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-cursos' %}">Cursos</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-profesores' %}">Profesores</a></li>
+            <!-- Dropdown con imagen de perfil -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {% if user.avatar %}
+                  <img src="{{ user.avatar.url }}" alt="Foto de perfil" class="rounded-circle me-2" width="30" height="30">
+                {% else %}
+                  <img src="{% static 'default-avatar.png' %}" alt="Avatar" class="rounded-circle me-2" width="30" height="30">
+                {% endif %}
+                {{ user.username }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Mi Perfil</a></li>
+                <li>
+                  <form action="{% url 'logout' %}" method="post" class="m-0">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item">Salir</button>
+                  </form>
+                </li>
+              </ul>
+            </li>
+
+          {% else %}
+            <!-- Solo mostrar si NO está logueado -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Registrarse</a></li>
+          {% endif %}
 
         </ul>
       </div>

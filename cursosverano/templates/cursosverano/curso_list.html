@@ -7,7 +7,7 @@
   <a href="{%  url 'cursosverano:crear' %}" class="btn btn-success mb-3">Crear Curso de Verano</a>
 
   <ul class="list-group">
-    {% for curso in cursos %}
+    {% for curso in lista_curso %}
       <li class="list-group-item">{{ curso.nombre }} ({{ curso.codigo }})</li>
     {% empty %}
       <li class="list-group-item">No hay cursos de verano disponibles</li>

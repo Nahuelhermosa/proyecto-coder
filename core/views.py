@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
+from django.contrib.auth.decorators import login_required
 # from .models import Estudiante # Relativa
 from core.models import estudiante# Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual, ProfesorForm,CursoForm
@@ -23,6 +24,7 @@ def index(request):
 #     return render(request, "core/estudiantes_list.html", contexto)
 
 # POST - Crear info / GET - Pedir info / DELETE = Eliminar / PUT,UPDATE = Editar
+@login_required
 def crear_estudiante(request):
     if request.method == "POST":
         formulario = EstudianteForm(request.POST)
@@ -34,7 +36,7 @@ def crear_estudiante(request):
 
     return render(request, "core/estudiante_form.html", {"form": formulario})
 
-
+@login_required
 def estudiante_list(request):
     query = request.GET.get("q", "")
     
@@ -48,6 +50,7 @@ def estudiante_list(request):
     }
     return render(request, "core/estudiantes_list.html", contexto)
 
+@login_required
 def editar_estudiante(request, estudiante_id):
     est = get_object_or_404(estudiante, id=estudiante_id)
 
@@ -61,6 +64,7 @@ def editar_estudiante(request, estudiante_id):
 
     return render(request, "core/estudiante_form.html", {"form": formulario})
 
+@login_required
 def eliminar_estudiante(request, estudiante_id):
     est = get_object_or_404(estudiante, id=estudiante_id)
 
@@ -70,6 +74,7 @@ def eliminar_estudiante(request, estudiante_id):
 
     return render(request, "core/estudiante_confirm_delete.html", {"estudiante": est})
 
+@login_required
 def crear_profesor(request):
     if request.method == "POST":
         form = ProfesorForm(request.POST)
@@ -82,10 +87,12 @@ def crear_profesor(request):
     return render(request, "core/profesores_list.html", {"form": form})
 
 
+@login_required
 def listar_profesores(request):
     profesores = Profesor.objects.all()
     return render(request, "core/profesores.html", {"profesores": profesores})
 
+@login_required
 def listar_cursos(request):
     q = request.GET.get("q", "")
     if q:
@@ -94,6 +101,8 @@ def listar_cursos(request):
         cursos = Curso.objects.all()
     return render(request, "core/cursos.html", {"cursos": cursos, "q": q})
 
+
+@login_required
 def crear_curso(request):
     if request.method == "POST":
         form = CursoForm(request.POST)
@@ -104,6 +113,7 @@ def crear_curso(request):
         form = CursoForm()
     return render(request, "core/cursos_form.html", {"form": form})
 
+@login_required
 def estudiante_detail(request, pk):
     est = get_object_or_404(estudiante, pk=pk)
     return render(request, "core/estudiante_detail.html", {"estudiante": est})

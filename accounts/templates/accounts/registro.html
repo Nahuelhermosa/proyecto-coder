@@ -1,0 +1,15 @@
+{% extends "core/index.html" %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="card mx-auto" style="max-width: 500px;">
+  <div class="card-body">
+    <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
