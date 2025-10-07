@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto"> 
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Menu</a></li>  
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Inicio</a></li>  
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-estudiantes' %}">Estudiantes</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-cursos' %}">Cursos</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'listar-profesores' %}">Profesores</a></li>
@@ -68,7 +68,7 @@
       <img src="{% static 'logo.2.png' %}" 
            alt="Logo Colegio" 
            class="img-fluid mb-3" 
-           style="max-width: 300px;">
+           style="max-width: 350px;">
       <h1 class="mt-3">Bienvenidos al Colegio Superior Belgrano</h1>
     {% endblock %}
   </div>
