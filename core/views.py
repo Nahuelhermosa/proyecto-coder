@@ -117,3 +117,34 @@ def crear_curso(request):
 def estudiante_detail(request, pk):
     est = get_object_or_404(estudiante, pk=pk)
     return render(request, "core/estudiante_detail.html", {"estudiante": est})
+
+@login_required
+def editar_profesor(request, profesor_id):
+    profesor = get_object_or_404(Profesor, id=profesor_id)
+
+    if request.method == "POST":
+        form = ProfesorForm(request.POST, instance=profesor)
+        if form.is_valid():
+            form.save()
+            return redirect("listar-profesores")
+    else:
+        form = ProfesorForm(instance=profesor)
+
+    return render(request, "core/profesores_list.html", {"form": form, "profesor": profesor})
+
+
+@login_required
+def eliminar_profesor(request, profesor_id):
+    profesor = get_object_or_404(Profesor, id=profesor_id)
+
+    if request.method == "POST":
+        profesor.delete()
+        return redirect("listar-profesores")
+
+    return render(request, "core/profesor_confirm_delete.html", {"profesor": profesor})
+
+
+@login_required
+def profesor_detail(request, pk):
+    profesor = get_object_or_404(Profesor, pk=pk)
+    return render(request, "core/profesor_detail.html", {"profesor": profesor})

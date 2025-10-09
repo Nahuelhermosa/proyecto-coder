@@ -1,62 +1,120 @@
-        .Proyecto Colegio Superior Belgrano
+🏫 Proyecto Django – Trabajo Final Coder
+📘 Descripción
 
-Este proyecto es una aplicación web desarrollada con Django que permite gestionar estudiantes, cursos y profesores de manera sencilla.
+Este proyecto fue desarrollado como trabajo final del curso de Django.
+El sistema representa un sitio institucional para un colegio, donde se gestionan estudiantes, profesores y cursos.
+Además, incluye funcionalidades de autenticación y una sección especial para cursos de verano.
 
-.Incluye un menú principal, páginas de listado y creación de registros, y un diseño responsivo con Bootstrap 5.
+El proyecto está construido con Django, usando templates con Bootstrap para un diseño moderno y responsivo.
 
-        .Funcionalidades principales
+⚙️ Estructura de Aplicaciones
+1️⃣ core
 
-Página de inicio con logo y mensaje de bienvenida.
+Contiene las secciones principales del sitio:
 
-Gestión de estudiantes:
+index: página de inicio con el logo institucional (en /static/img/logo.png).
 
-Listado de estudiantes.
+estudiantes: CRUD completo (crear, editar, eliminar y listar estudiantes).
 
-Creación de nuevos estudiantes.
+profesores: CRUD completo (crear, editar, eliminar y listar profesores).
 
-Gestión de profesores:
+cursos: listado general de cursos del colegio.
 
-Listado de profesores.
+2️⃣ accounts
 
-Creación de nuevos profesores.
+Maneja la autenticación de usuarios (login, logout y registro).
+Permite acceder al panel principal solo a usuarios autenticados.
 
-Gestión de cursos:
+3️⃣ cursosverano
 
-Listado de cursos.
+Aplicación adicional donde se gestionan los Cursos de Verano.
+Incluye formulario de alta y listado, utilizando el modelo CursoVerano.
 
-Creación de nuevos cursos.
+🧩 Funcionalidades CRUD en core
+👨‍🏫 Profesores
 
-Navegación clara mediante una barra de menú.
+Crear nuevo profesor mediante formulario.
 
-        .Tecnologías utilizadas
+Editar datos existentes.
 
-Python 3.12
+Eliminar profesor.
 
-Django 5.2.6
+Listado con nombre, apellido y correo electrónico.
 
-Bootstrap 5 (para el diseño responsivo)
+🎓 Estudiantes
 
-SQLite (base de datos por defecto de Django)
+Crear estudiante desde formulario.
+
+Editar información.
+
+Eliminar registro.
+
+Listado con los datos completos y botones de acción (editar y eliminar).
+
+Ambos CRUD usan plantillas con Bootstrap para mantener una interfaz uniforme, moderna y clara.
+
 
         .Estructura del proyecto
 
 trabajo-coder/
 │
-├─ core/                # Aplicación principal
-│   ├─ migrations/
-│   ├─ static/          # Archivos estáticos (logo, css, js)
-│   ├─ templates/       # Templates HTML
-│   │   └─ index.html
-│   ├─ urls.py          # Rutas de la app
-│   └─ views.py         # Vistas de la app
+├── manage.py
+├── requirements.txt
 │
-├─ coder/               # Configuración del proyecto
-│   ├─ settings.py
-│   ├─ urls.py
-│   └─ wsgi.py
+├── core/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── models.py
+│   ├── urls.py
+│   ├── views.py
+│   ├── templates/
+│   │   ├── core/
+│   │   │   ├── index.html
+│   │   │   ├── estudiantes.html
+│   │   │   ├── profesor.html
+│   │   │   ├── curso_list.html
+│   │   │   ├── estudiante_form.html
+│   │   │   ├── profesor_form.html
+│   │   │   └── ...
+│   └── static/
+│       └── img/
+│           └── logo.png
 │
-├─ manage.py
-└─ README.md
+├── accounts/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/
+│       └── accounts/
+│           ├── login.html
+│           ├── logout.html
+│           └── register.html
+│
+├── cursosverano/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── forms.py
+│   ├── urls.py
+│   ├── views.py
+│   └── templates/
+│       └── cursosverano/
+│           ├── curso_list.html
+│           ├── curso_form.html
+│           └── ...
+│
+└── proyecto/
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
 
         .Instalación y ejecución
 
@@ -74,3 +132,10 @@ python manage.py migrate
 python manage.py runserver
 
 http://127.0.0.1:8000/
+
+🔐 Usuario de Prueba
+
+Para ingresar a la aplicación:
+
+Usuario: usuario1
+Contraseña: coder123

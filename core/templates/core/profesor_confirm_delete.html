@@ -1,0 +1,22 @@
+{% extends "core/index.html" %}
+{% block title %}Eliminar Profesor{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-danger text-white text-center rounded-top-4">
+        <h2 class="mb-0">Eliminar Profesor</h2>
+      </div>
+      <div class="card-body text-center">
+        <p>¿Estás seguro de que deseas eliminar al profesor <strong>{{ profesor.nombre }} {{ profesor.apellido }}</strong>?</p>
+        <form method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Eliminar</button>
+          <a href="{% url 'listar-profesores' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
