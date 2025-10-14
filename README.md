@@ -6,6 +6,19 @@ El sistema representa un sitio institucional para un colegio, donde se gestionan
 Además, incluye funcionalidades de autenticación y una sección especial para cursos de verano.
 
 El proyecto está construido con Django, usando templates con Bootstrap para un diseño moderno y responsivo.
+Con esto, el proyecto cumple con todas las consignas solicitadas, incluyendo:
+
+CRUD completo de cursos de verano
+Visualización de avatares
+Página About Me
+Buscador de profesores
+
+🔐 Usuario de Prueba
+
+Para ingresar a la aplicación:
+
+Usuario: usuario1
+Contraseña: coder123
 
 ⚙️ Estructura de Aplicaciones
 1️⃣ core
@@ -77,6 +90,7 @@ trabajo-coder/
 │   │   │   ├── curso_list.html
 │   │   │   ├── estudiante_form.html
 │   │   │   ├── profesor_form.html
+            ├── about.html
 │   │   │   └── ...
 │   └── static/
 │       └── img/

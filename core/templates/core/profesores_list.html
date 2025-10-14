@@ -1,24 +1,53 @@
 {% extends "core/index.html" %}
 
-{% block title %} Crear Profesor {% endblock %}
-
 {% block content %}
+<div class="container mt-4">
 
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <div class="card shadow-lg rounded-4 border-0">
-      <div class="card-header bg-success text-white text-center rounded-top-4">
-        <h2 class="mb-0">Agregar Profesor</h2>
-      </div>
-      <div class="card-body">
-        <form method="POST">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit" class="btn btn-success mt-3">Guardar</button>
-          
-        </form>
-      </div>
-    </div>
+  <h2 class="text-center mb-3">Lista de Profesores</h2>
+
+  <form method="get" action="{% url 'lista-profesores' %}" class="d-flex justify-content-center mb-4">
+    <input
+      type="text"
+      name="q"
+      value="{{ query }}"
+      class="form-control w-50 me-2"
+      placeholder="Buscar profesor por nombre o apellido..."
+    >
+    <button type="submit" class="btn btn-success">Buscar</button>
+  </form>
+
+  <div class="text-center mb-3">
+    <a href="{% url 'crear-profesor' %}" class="btn btn-primary">Crear Profesor</a>
   </div>
+
+  {% if profesores %}
+    <table class="table table-striped table-hover text-center">
+      <thead class="table-success">
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for profesor in profesores %}
+          <tr>
+            <td>{{ profesor.nombre }}</td>
+            <td>{{ profesor.apellido }}</td>
+            <td>{{ profesor.email }}</td>
+            <td>
+              <a href="{% url 'detalle-profesor' profesor.id %}" class="btn btn-outline-primary btn-sm">Ver</a>
+              <a href="{% url 'editar-profesor' profesor.id %}" class="btn btn-outline-warning btn-sm">Editar</a>
+              <a href="{% url 'eliminar-profesor' profesor.id %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-center text-muted">No se encontraron profesores con ese nombre o apellido.</p>
+  {% endif %}
+
 </div>
 {% endblock %}

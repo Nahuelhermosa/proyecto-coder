@@ -1,0 +1,30 @@
+{% extends "core/index.html" %}
+{% load static %}
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <div class="text-center mb-4">
+            <img src="{% static 'logo.1.png' %}" 
+                 alt="Mi Avatar" 
+                 class="rounded-circle mb-3" 
+                 width="150" height="150">
+            <h2 class="fw-bold">{{ user.get_full_name|default:user.username }}</h2>
+            <p class="text-muted">Desarrollador Frontend | React, Next.js, Vue | Apasionado por la tecnología y la educación</p>
+        </div>
+
+        <div>
+            <h4>Sobre mí</h4>
+            <p>
+                ¡Hola! Soy Nahuel Hermosa, profesional Front End Developer con experiencia en React, Next.js y Vue. 
+                Me gusta crear aplicaciones web modernas, con buen diseño y funcionalidad. Este proyecto es un ejemplo 
+                de mis habilidades en Django, gestión de bases de datos y manejo de usuarios.
+            </p>
+
+            <h4>Contacto</h4>
+            <p>Email: <a href="mailto:nahuel_pro_517@hotmail.com">nahuel_pro_517@hotmail.com</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

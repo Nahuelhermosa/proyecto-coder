@@ -10,6 +10,22 @@
     <a href="{% url 'crear-profesor' %}" class="btn btn-success mb-3">Agregar Profesor</a>
   </div>
 
+  <!-- 🔍 Formulario de búsqueda -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+      <form method="get" action="{% url 'lista-profesores' %}" class="d-flex">
+        <input 
+          type="text" 
+          name="q" 
+          class="form-control me-2" 
+          placeholder="Buscar profesor por nombre o apellido..." 
+          value="{{ request.GET.q }}"
+        >
+        <button type="submit" class="btn btn-outline-success">Buscar</button>
+      </form>
+    </div>
+  </div>
+
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
       <div class="card shadow-lg rounded-4 border-0">

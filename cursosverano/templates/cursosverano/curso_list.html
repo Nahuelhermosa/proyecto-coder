@@ -1,4 +1,3 @@
-
 {% extends "core/index.html" %}
 
 {% block content %}
@@ -8,12 +7,28 @@
     <p class="text-muted">Explorá la lista de cursos disponibles o creá uno nuevo.</p>
   </div>
 
+ 
+
   <div class="text-center mb-4">
     <a href="{% url 'cursosverano:crear' %}" class="btn btn-success btn-lg shadow-sm">
       <i class="bi bi-plus-circle"></i> Crear Curso de Verano
     </a>
   </div>
+ <!-- 🔍 Buscador -->
+  <form method="get" class="d-flex justify-content-center mb-4" role="search">
+    <input 
+      class="form-control me-2 w-50 shadow-sm" 
+      type="search" 
+      placeholder="Buscar curso por nombre" 
+      aria-label="Buscar" 
+      name="q" 
+      value="{{ q }}"
+    />
+    <button class="btn btn-primary shadow-sm" type="submit">
+      <i class="bi bi-search"></i> Buscar
+    </button>
 
+  </form>
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
       <div class="card shadow border-0 rounded-4">
@@ -24,8 +39,15 @@
         <ul class="list-group list-group-flush">
           {% for curso in lista_curso %}
             <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span class="fw-semibold">{{ curso.nombre }}</span>
-              <span class="badge bg-info text-dark">{{ curso.codigo }}</span>
+              <div>
+                <span class="fw-semibold">{{ curso.nombre }}</span>
+                <span class="badge bg-info text-dark ms-2">{{ curso.codigo }}</span>
+              </div>
+              <div>
+                <a href="{% url 'cursosverano:detalle-curso' curso.codigo %}" class="btn btn-sm btn-info text-white">Ver</a>
+                <a href="{% url 'cursosverano:editar-curso' curso.codigo %}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="{% url 'cursosverano:eliminar-curso' curso.codigo %}" class="btn btn-sm btn-danger">Eliminar</a>
+              </div>
             </li>
           {% empty %}
             <li class="list-group-item text-center text-muted">

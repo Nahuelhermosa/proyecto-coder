@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 # from .models import Estudiante # Relativa
 from core.models import estudiante# Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual, ProfesorForm,CursoForm
@@ -75,24 +76,6 @@ def eliminar_estudiante(request, estudiante_id):
     return render(request, "core/estudiante_confirm_delete.html", {"estudiante": est})
 
 @login_required
-def crear_profesor(request):
-    if request.method == "POST":
-        form = ProfesorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("listar-profesores")  # Redirige a la lista de profesores
-    else:
-        form = ProfesorForm()
-    
-    return render(request, "core/profesores_list.html", {"form": form})
-
-
-@login_required
-def listar_profesores(request):
-    profesores = Profesor.objects.all()
-    return render(request, "core/profesores.html", {"profesores": profesores})
-
-@login_required
 def listar_cursos(request):
     q = request.GET.get("q", "")
     if q:
@@ -117,6 +100,25 @@ def crear_curso(request):
 def estudiante_detail(request, pk):
     est = get_object_or_404(estudiante, pk=pk)
     return render(request, "core/estudiante_detail.html", {"estudiante": est})
+
+
+@login_required
+def crear_profesor(request):
+    if request.method == "POST":
+        form = ProfesorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("listar-profesores")  # Redirige a la lista de profesores
+    else:
+        form = ProfesorForm()
+    
+    return render(request, "core/profesores_list.html", {"form": form})
+
+
+@login_required
+def listar_profesores(request):
+    profesores = Profesor.objects.all()
+    return render(request, "core/profesores.html", {"profesores": profesores})
 
 @login_required
 def editar_profesor(request, profesor_id):
@@ -148,3 +150,25 @@ def eliminar_profesor(request, profesor_id):
 def profesor_detail(request, pk):
     profesor = get_object_or_404(Profesor, pk=pk)
     return render(request, "core/profesor_detail.html", {"profesor": profesor})
+
+
+@login_required
+def lista_profesores(request):
+    query = request.GET.get("q", "")
+
+    if query:
+        profesores = Profesor.objects.filter(
+            Q(nombre__icontains=query) | Q(apellido__icontains=query)
+        )
+    else:
+        profesores = Profesor.objects.all()
+
+    contexto = {
+        "profesores": profesores,
+        "query": query,
+    }
+    return render(request, "core/profesores_list.html", contexto)
+
+@login_required
+def about_view(request):
+    return render(request, "core/about.html")

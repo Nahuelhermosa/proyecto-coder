@@ -1,0 +1,17 @@
+{% extends "core/index.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-header bg-primary text-white text-center rounded-top-4">
+      <h2>{{ curso.nombre }}</h2>
+    </div>
+    <div class="card-body">
+      <p><strong>Código:</strong> {{ curso.codigo }}</p>
+      <p><strong>Descripción:</strong> {{ curso.descripcion|default:"Sin descripción" }}</p>
+      <a href="{% url 'cursosverano:editar-curso' curso.codigo %}" class="btn btn-warning">Editar</a>
+      <a href="{% url 'cursosverano:listar-cursos' %}" class="btn btn-secondary">Volver</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
