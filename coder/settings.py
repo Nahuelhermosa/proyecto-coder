@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+
 """
 Django settings for coder project.
 
@@ -9,8 +12,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-import os
-from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-9bv5sfk%n0bs#qrs^=f^_j!4w-d3x+m9$di=*eg&e5=ik4t24z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['proyecto-coder-zfbz.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['proyecto-coder-zfbz.onrender.com','127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -128,6 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 MEDIA_URL = '/media/'
